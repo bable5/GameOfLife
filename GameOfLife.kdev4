@@ -1,0 +1,4 @@
+[Project]
+Name=GameOfLife
+Manager=KDevCMakeManager
+VersionControl=kdevgit
