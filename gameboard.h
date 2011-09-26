@@ -18,8 +18,8 @@
 #ifndef GAMEBOARD_H
 #define GAMEBOARD_H
 
-#define ALIVE 1;
-#define DEAD 0;
+#define ALIVE 1
+#define DEAD 0
 
 typedef int cell;
 
@@ -33,16 +33,15 @@ private:
   int height;
   int cellLoc(int x, int y){ return x*width + y; }
   void putCell(int x, int y, cell newData, cell *dest){ dest[cellLoc(x, y)] = newData; }
-  void putCellSwap(int x, int y, cell newData){putCell(x, y, newData, swapData)}
-  private void swap();
+  void putCellSwap(int x, int y, cell newData){ putCell(x, y, newData, swapdata); }
+  void swap();
 public:
     GameBoard(int width, int height);
     virtual ~GameBoard();
-    void putCell(int x, int y, cell newData){ putCell(x, y, newData, data)}
+    void putCell(int x, int y, cell newData){ putCell(x, y, newData, data); }
     cell getCell(int x, int y){ return  data[cellLoc(x, y)]; }
-    void putCell(int x, int y, cell newData){ data[cellLoc(x, y)] = newData; }
-    
     void stepSystem();
+    int numNeighbors(int x, int y);
 };
 
 #endif // GAMEBOARD_H

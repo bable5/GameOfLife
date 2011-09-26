@@ -1,15 +1,32 @@
 #include <iostream>
 #include "gameboard.h"
 
+void loadInitState(GameBoard *gb, int centerX, int centerY){
+  gb->putCell(centerX - 1, centerY + 0, ALIVE);
+  gb->putCell(centerX + 0, centerY - 1, ALIVE);
+  gb->putCell(centerX + 1, centerY - 1, ALIVE);
+  gb->putCell(centerX + 1, centerY + 0, ALIVE);
+  gb->putCell(centerX + 1, centerY + 1, ALIVE);
+}
+
 int main(int argc, char **argv) {
-    GameBoard *gb = new GameBoard(5, 5);
+    int w = 10;
+    int h = 10;
+    GameBoard *gb = new GameBoard(w, h);
+    char c;
     
+    loadInitState(gb, 4, 4);
     
-    for(int i = 0; i < 5; i++){
-      for(int j = 0; j < 5; j++){
-        std::cout << gb->getCell(i, j) << " ";
+    while(1) {
+      for(int i = 0; i < w; i++){
+	for(int j = 0; j < h; j++){
+	  std::cout << gb->getCell(i, j) << " ";
+	}
+	std::cout << std::endl;
       }
-      std::cout << std::endl;
+      //std::cin >> c;
+      std::cout << "-------------------------------------------" << std::endl;
+      gb->stepSystem();
     }
     
     delete gb;

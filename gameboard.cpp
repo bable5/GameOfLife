@@ -53,14 +53,20 @@ void GameBoard::stepSystem(){
         for(y = 0; y < height; y++){
             count = numNeighbors(x, y);    
             value = getCell(x, y);
-            if(value == ALIVE){
+            
+            if( value == ALIVE ) {
                 if( count < 2 || count > 3 ){
-                    putCell(x, y, DEAD);
-                }
-            }else{
+                    putCellSwap(x, y, DEAD);
+                }else{
+		    putCellSwap(x, y, value);
+		}
+            } 
+            else {
                 if( count == 3 ){
-                    putCell(x, y, ALIVE);
-                }
+                    putCellSwap(x, y, ALIVE);
+                }else{
+		    putCellSwap(x, y, value);
+		}
             }
         }
     }
@@ -68,3 +74,49 @@ void GameBoard::stepSystem(){
     swap();
 }
 
+int GameBoard::numNeighbors(int x, int y){
+    int count = 0;
+    int x1, y1;
+    
+    //left
+    if(x > 0){
+      x1 = x-1;
+      //up
+      if(y > 0){
+	count += getCell(x1, y - 1);
+      }
+      
+      count += getCell(x1, y);
+      
+      if( y < (height-1) ){
+	count += getCell(x1, y+1);
+      }
+    }
+    
+    //up
+    if(y > 0){
+      count += getCell(x, y - 1);
+    }
+    
+    //right
+    if(x < width - 1){
+      x1 = x+1;
+      //up
+      if(y > 0){
+	count += getCell(x1, y - 1);
+      }
+      
+      count += getCell(x1, y);
+      
+      if( y < (height-1) ){
+	count += getCell(x1, y+1);
+      }
+    }
+    
+    //down
+    if( y < (height-1) ){
+	count += getCell(x, y+1);
+    }
+    
+    return count;
+}
