@@ -16,8 +16,9 @@ int main(int argc, char **argv) {
     char c;
     
     loadInitState(gb, 4, 4);
-    
-    while(1) {
+    int i = 0;
+
+    while(i < 20) {
       for(int i = 0; i < w; i++){
 	for(int j = 0; j < h; j++){
 	  std::cout << gb->getCell(i, j) << " ";
@@ -27,6 +28,7 @@ int main(int argc, char **argv) {
       //std::cin >> c;
       std::cout << "-------------------------------------------" << std::endl;
       gb->stepSystem();
+      i++; 
     }
     
     delete gb;
